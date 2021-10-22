@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击按钮变色</title>
+    <script src="/vue.js"></script>
+</head>
+
+<style>
+    .divClass{
+        border: 1px solid yellow;
+            width: 200px;
+            height: 200px;
+    }
+.bgColor {
+    background-color: black;
+}
+.textColor {
+    color: white;
+}
+</style>
+<body>
+    
+<div id="app">
+    <div :class="{divClass:isDivClass,bgColor:isbgColor,textColor:istextColor}">
+        我是小黑
+    </div>
+    <button @click="changeColor">点击</button>
+</div>
+<script>
+    new Vue({
+        el:'#app',
+        data() {
+            return {
+                isDivClass:true,
+                isbgColor:false,
+                istextColor:false
+            }
+        },
+        methods: {
+            changeColor(){
+                this.isbgColor=!this.isbgColor;
+                        this.istextColor=!this.istextColor; 
+            }
+        },
+    })
+</script>
+
+</body>
+</html>

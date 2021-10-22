@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>属性绑定</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <a :href="urlData">{{textData}} </a><br>
+        <button @click="changeUrl">切换打开时百度或者是163</button>
+
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                urlData:'http://wwww.baidu.com',
+                      textData:'点击打开百度！！',
+                isChange:true
+            },
+            methods: {
+                // changeUrl:function(){
+
+                // } 
+                changeUrl(){
+                   if(this.isChange){
+                    this.urlData='http://wwww.baidu.com',
+                    this.textData='点击打开百度！！',
+                    this.isChange=false
+                   }else{
+                    this.urlData="http://wwww.163.com";
+                   this.textData="点击打开163！！";
+                   this.isChange=true
+                   }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

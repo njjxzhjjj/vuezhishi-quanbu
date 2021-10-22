@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案件的修饰</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        账户：<input type="text" v-model="userName"><br>
+        密码：<input type="text" v-model="userPwd" @keyup.delete="delPwd"><br>
+        <button @click="loginBtn" @keyup.enter="loginBtn">登录</button>
+
+    </div>
+    <script>
+        // Vue.config.keyCodes = 13
+      const app=  new Vue({
+            el: '#app',
+            data: {
+                userName:'',
+                userPwd:''
+            },
+            methods: {
+                loginBtn:function(){
+                    // 按回车键后 提交
+                    alert("提交了....")
+                },
+                delPwd:function(){
+                  this.userPwd=''
+                //   this.userPwd='一键删除全部内容'
+                },
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <span>vue 的插值表达式 只能写在文本里，标签的属性中不生效</span>
+
+
+        <h2>{{title}}</h2>
+        <h2>vue 的插值表达式 特性1 他可以 请用 js中的属性或者方法，如：字符串的长度为：{{title.length}}</h2>
+        <h2>vue 的插值表达式 特性2 他可以 做加减乘除 如：人民币{{rmb}}分等于{{rmb/100}}元</h2>
+        <h2>vue 的插值表达式 特性3 他可以 做三元运算，很重要 比如：身高{{height}}是 :{{height>=180 ? "<span style="color: red">男神</span>":"男人"}}
+        </h2>
+        <h1>问题:请把当为男神的时候变为红色，男人的时候变为绿色</h1>
+        <!-- <div v-if="height>=180 ">
+            <span style="color: red">男神</span>
+        </div>
+
+        <div v-else>
+            <span style="color: green">男人</span>
+        </div> -->
+        <!-- 以上是插值表达式，是作用在文本上的。 -->
+        <!-- 下面的placeholder中使用插值表达式就不可以了，那么就用别的 -->
+        <h1>如果想要改变标签属性中的文本的数据，需要绑定，这个绑定叫做指令: v-bind缩写是 : </h1>
+        <h1>v-bind 1、可以绑定 数据 2、可以绑定 样式 1、class 2、style 3、数组 或者对象 样式的绑定</h1>
+        <h1>数据绑定可以是 双向的 简称 双向绑定</h1>
+
+        <input type="text" v-bind:placeholder="searchKeyWord">
+        <input type="button" :value="add">
+        <h1>首先看数据的单项绑定 使用 加法 来计算</h1>
+        <h1>单项绑定 </h1>
+        <input type="text" :value="x">+<input type="text" :value="y">=<input type="text" :value="z"><br>
+        <input type="text" :value="x">+<input type="text" :value="y">={{x+y}}<br>
+        <h1>单项绑定 使用插值表达式 获取结果 观察</h1>
+        x:{{x}}  ||||  y:{{y}}  |||||  z:{{z}}
+        <h1>首先看数据的双向绑定 使用 加法 来计算</h1>
+        <h1>双向绑定 </h1>
+        <input type="text" v-model="x1">+<input type="text" v-model="y1">=<input type="text" v-model="z1"><br>
+        <input type="text" v-model="x1">*<input type="text" v-model="y1">={{x1*y1}}<br>
+        <input type="text" v-model.number="x1">+<input type="text" v-model.number="y1">={{x1+y1}}<br>
+       <h1>双向绑定 使用插值表达式 获取结果 观察</h1>
+        x1:{{x1}}  ||||  y1:{{y1}}  |||||  z1:{{z1}}
+        <!-- 让页面一刷新就执行我们的方法 也就是生命周期 -->
+
+    </div>
+
+    <!-- Html是什么构成的 1、标签(属性) 2、文本（） -->
+    <!-- vue就是数据的仓库 -->
+
+    <!-- <div id="app1">
+         <h2>不在vue作用域中</h2>
+    </div> -->
+    <script>
+        new Vue({
+            el: '#app',
+            // 一个一个阶段 创建之前 第一阶段
+            beforeCreate () {
+                // alert("vue生命周期的第一阶段，仅仅初始化了 new vue ...其他什么也没干")
+            },
+             //挂载点  第二阶段
+            created () {
+                // alert("该阶段处理了所有的选项，那么vue的Ajax请求数据，应该在这里产生，即Ajax在这里写，因为用户还没看到，页面的渲染，vue还没有挂载到app上")
+                // this.jiajia();
+           
+            },
+            // 挂载之前被调用  第三阶段 
+            beforeMount () {
+            //   alert("在挂载之前被调用 被调用的方法 不常用！！！")  
+            },
+            //挂载之后被调用 第四阶段
+            mounted () {
+                // alert("挂载之后被调用，常用的！！！ 当界面已经被挂载 就会被调用")  
+                // this.jiajia();
+            },
+            //改变之前  第五阶段
+            beforeUpdate () {
+                // alert("在数据发生改变后，DOM 被更新之前被调用   不常用！！！")
+            },
+            //改变之后  第六阶段
+            updated () {
+                // alert("在数据更改导致的虚拟 DOM 重新渲染和更新完毕之后被调用 不常用！！")
+                this.jiajia();
+            },
+            data: {
+                // 关联用插值表达式 {{}}
+                title: 'vue的学习的增删改查',
+                searchKeyWord: '搜索',
+                add: '新增',
+                rmb: 500,//单位分
+                height: 180,
+                x: 50,
+                y: 60,
+                z: 0,
+                x1: 50,
+                y1: 60,
+                z1: 0
+            },methods: {
+                jiajia:function(){
+                    this.z=this.x+this.y;
+                    this.z1=this.x1+this.y1;
+                }
+            }
+        })
+    </script>
+
+
+</body>
+
+</html>

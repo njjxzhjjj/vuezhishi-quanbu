@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="msg" @keydown="kaddFun($event)" />
+        <!-- <button @click="addFun(msg)">添加</button> -->
+        <br /><br />
+        <h3>正在进行 {{noLength}}</h3>
+        <ul>
+            <li v-for="(item,key) in list" v-if="!item.checked"><input type="checkbox" v-model="item.checked"
+                    @change="saveList()" /> -----{{item.title}}--- <button @click="moveFun(key)">删除</button></li>
+        </ul>
+        <h3>已经完成 {{yesLength}}</h3>
+        <ul>
+            <li v-for="(item,key) in list" v-if="item.checked"><input type="checkbox" v-model="item.checked" />
+                -----{{item.title}}------ <button @click="moveFun(key)">删除</button></li>
+        </ul>
+    </div>
+    <script src="/vue.js"></script>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                msg: '',
+                list: []
+            },
+            // 计算器
+            computed: {
+                noLength() {
+                    // 未完成数组的长度
+                    let num = "";
+                    this.list.map((item) => { // map 数组遍历
+                        if (!item.checked) {
+                            num++;
+                        }
+                    });
+                    return num;
+                },
+                yesLength() {
+                    // 已完成数组的长度
+                    let num = "";
+                    this.list.map((item) => { // map 数组遍历
+                        if (item.checked) {
+                            num++;
+                        }
+                    });
+                    return num;
+                },
+            },
+
+            methods: {
+                addFun(msg) {
+                    if(msg!=null && msg!=''){
+                        this.list.push({
+                        title: this.msg,
+                        checked: false,
+                    }),
+
+                         this.msg = '';
+                    //存储数据
+                    localStorage.setItem('list', JSON.stringify(this.list))
+                    }
+                   
+                },
+                kaddFun(msg) {
+                    if (msg.keyCode == 13) {
+                        this.addFun(msg);
+                    }
+                },
+                moveFun(key) {
+                    // confirm("是否删除"+this.list[key].title+"?");
+                    this.list.splice(key, 1);
+                    localStorage.setItem('list', JSON.stringify(this.list))
+                },
+                saveList() {
+                    localStorage.setItem('list', JSON.stringify(this.list))
+                }
+            },
+            //生命周期函数   vue页面刷新就会触发的方法
+            mounted() {
+                //json字符串转成json对象
+                var list = JSON.parse(localStorage.getItem('list'))
+                //判断list是否存在
+                if (list) {
+                    //存在则将获取到的list保存刷新后的list中
+                    this.list = list;
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

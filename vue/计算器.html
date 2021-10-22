@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算器</title>
+    <script src="/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h3>计算器</h3>
+        <input type="text" v-model.number="one">+
+        <input type="text" v-model.number="two"><br>
+        <input type="button" @click="jisuan" value="点击计算">
+        <input type="text" v-model.number="three">
+    </div>
+    <script>
+       var vm= new Vue({
+            el: '#app',
+            data: {
+                one: '', //第一个数
+                two: '', //第二个数
+                three: '', //结果
+            },
+            methods: {
+                jisuan: function () {
+                    this.three = this.one + this.two
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

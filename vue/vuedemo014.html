@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分支 v-if判断  v-show的区别</title>
+    <script src="/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        
+  <div v-show="isLook" :style='{height:gao,width:kuan,backgroundColor:bgse}'>
+     v-show  你能不能看到我 本质是：display ：none 是源代码可以找到的 只是元素隐藏了
+  </div>
+  <button @click="showClick">点击观察 v-show的本质</button>
+
+  <div v-if="isLook2" :style="[kuanGaoObj,bgObj]">
+    v-if  你能不能看到我2  本质：元素消失了，源代码看不到了
+</div>
+<button @click="ifClick">点击观察 v-if的本质</button>
+
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isLook:true,
+                
+                gao:'200px',
+                kuan:'200px',
+                bgse:'red',
+                kuanGaoObj:{
+                    height:'200px',
+                    width:'200px',
+                    
+                },
+                bgObj:{
+                    backgroundColor:'blue'
+                },
+                isLook2:true,
+            },
+            methods: {
+                showClick:function(){
+                    this.isLook=!this.isLook
+                  
+                },
+                ifClick:function(){
+                   
+                    this.isLook2=!this.isLook2
+                }
+            }
+        })
+    </script>
+</body>
+</html>

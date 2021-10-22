@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绑定指令 样式的绑定之 class 绑定</title>
+    <script src="/vue.js"></script>
+    <style>
+        .divClass{
+            border: 1px solid red;
+            height: 200px;
+            width: 200px;
+        }
+        .divClass2{
+            background-color: tomato;
+        }
+        .divClass3{
+           background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div :class="{divClass:isDivClass,divClass3:isDivClassx,divClass2:isDivClassy}">
+            绑定指令 样式的绑定之 class 绑定
+        </div>
+        <div>
+            <button @click="qiehuan">点击 切换 黄色 ，绿色</button>
+        </div>
+
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {   //以后尽量这样写
+                return {
+                    isDivClass:true,  //对象的绑定 
+                    isDivClassx:true,  //对象的绑定 
+                    isDivClassy:false,  //对象的绑定 
+                }
+            },
+            methods: {
+                qiehuan:function(){
+                    // 操作 isDivClassx 
+                     this.isDivClassx=!this.isDivClassx;
+                     this.isDivClassy=!this.isDivClassy;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
